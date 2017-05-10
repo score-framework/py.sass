@@ -24,13 +24,11 @@
 # the discretion of STRG.AT GmbH also the competent court, in whose district the
 # Licensee has his registered seat, an establishment or assets.
 
-from score.init import parse_bool, parse_list, ConfiguredModule
+from score.init import ConfiguredModule
 from .renderer import SassRenderer
 
 
 defaults = {
-    'tpl.extensions': ['scss', 'sass'],
-    'tpl.register_minifier': True,
     'cachedir': None,
 }
 
@@ -43,12 +41,7 @@ def init(confdict, tpl):
     """
     conf = dict(defaults.items())
     conf.update(confdict)
-    if parse_bool(conf['tpl.register_minifier']):
-        import csscompressor
-        filetype = tpl.filetypes['text/css']
-        filetype.postprocessors.append(csscompressor.compress)
-    extensions = parse_list(conf['tpl.extensions'])
-    return ConfiguredSassModule(tpl, extensions, conf['cachedir'])
+    return ConfiguredSassModule(tpl, conf['cachedir'])
 
 
 class ConfiguredSassModule(ConfiguredModule):
@@ -57,42 +50,12 @@ class ConfiguredSassModule(ConfiguredModule):
     <score.init.ConfiguredModule>`.
     """
 
-    def __init__(self, tpl, extensions, cachedir):
+    def __init__(self, tpl, cachedir):
         super().__init__(__package__)
         self.tpl = tpl
-        for extension in extensions:
+        for extension in ['scss', 'sass']:
             tpl.engines[extension] = self._create_renderer
             tpl.filetypes['text/css'].extensions.append(extension)
 
     def _create_renderer(self, tpl_conf, filetype):
         return SassRenderer(self, tpl_conf, filetype)
-
-    def score_webassets_proxy(self):
-        from score.webassets import TemplateWebassetsProxy
-
-        class SassWebassetsProxy(TemplateWebassetsProxy):
-
-            def __init__(self, tpl):
-                super().__init__(tpl, 'text/css')
-
-            def render_url(self, url):
-                tag = '<link rel="stylesheet" href="%s" type="text/css">'
-                return tag % (url,)
-
-            def create_bundle(self, paths):
-                """
-                Renders the combined js file.
-                """
-                parts = []
-                for path in sorted(paths):
-                    s = '/*{0}*/\n/*{1:^74}*/\n/*{0}*/'.format('*' * 74, path)
-                    parts.append(s)
-                    parts.append(self.tpl.render(path,
-                                                 apply_postprocessors=False))
-                content = '\n\n'.join(parts)
-                filetype = self.tpl.filetypes['text/css']
-                for postprocessor in filetype.postprocessors:
-                    content = postprocessor(content)
-                return content
-
-        return SassWebassetsProxy(self.tpl)
