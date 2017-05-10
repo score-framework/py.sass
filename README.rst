@@ -8,16 +8,14 @@ libraries for the development of large scale web projects. Powered by strg.at_.
 .. _strg.at: http://strg.at
 
 
-score.css
-=========
+score.sass
+==========
 
-This package allows convenient integration of css and scss_ files into your
-projects.
+This package allows convenient integration of sass_ files into your projects.
 
-The `narrative documentation of score.css`__ contains all the information you
-need to put this module to good use.
+This module is a work in progress, thus currently poorly documented :-/
 
-__ http://www.score-framework.org/doc/python/css/
+.. _sass: http://sass-lang.com/
 
 
 License

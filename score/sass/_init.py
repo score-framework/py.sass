@@ -29,7 +29,7 @@ from .renderer import SassRenderer
 
 
 defaults = {
-    'tpl.extensions': ['css', 'scss', 'sass'],
+    'tpl.extensions': ['scss', 'sass'],
     'tpl.register_minifier': True,
     'cachedir': None,
 }
@@ -61,8 +61,7 @@ class ConfiguredSassModule(ConfiguredModule):
         super().__init__(__package__)
         self.tpl = tpl
         for extension in extensions:
-            if extension != 'css':
-                tpl.engines[extension] = self._create_renderer
+            tpl.engines[extension] = self._create_renderer
             tpl.filetypes['text/css'].extensions.append(extension)
 
     def _create_renderer(self, tpl_conf, filetype):
