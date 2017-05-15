@@ -53,6 +53,7 @@ class ConfiguredSassModule(ConfiguredModule):
     def __init__(self, tpl, cachedir):
         super().__init__(__package__)
         self.tpl = tpl
+        self.cachedir = cachedir
         for extension in ['scss', 'sass']:
             tpl.engines[extension] = self._create_renderer
             tpl.filetypes['text/css'].extensions.append(extension)
