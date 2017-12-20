@@ -30,6 +30,6 @@ API
 
 .. autofunction:: init
 
-.. autoclass:: ConfiguredCssModule()
+.. autoclass:: ConfiguredSassModule()
 
 .. autoclass:: SassRenderer()
