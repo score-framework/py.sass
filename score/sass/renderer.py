@@ -6,7 +6,7 @@ import hashlib
 
 class SassRenderer(Renderer):
     """
-    :class:`score.tpl.TemplateConverter` for scss files.
+    :class:`score.tpl.Renderer` for scss (and sass) files.
     """
 
     def __init__(self, sass_conf, *args, **kwargs):

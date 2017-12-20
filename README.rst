@@ -13,9 +13,11 @@ score.sass
 
 This package allows convenient integration of sass_ files into your projects.
 
-This module is a work in progress, thus currently poorly documented :-/
+The `narrative documentation of score.sass`__ contains all the information you
+need to put this module to good use.
 
 .. _sass: http://sass-lang.com/
+__ http://www.score-framework.org/doc/python/sass/
 
 
 License

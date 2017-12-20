@@ -25,6 +25,7 @@
 # Licensee has his registered seat, an establishment or assets.
 
 from ._init import init, ConfiguredSassModule
+from .renderer import SassRenderer
 
 
-__all__ = ('init', 'ConfiguredSassModule')
+__all__ = ('init', 'ConfiguredSassModule', 'SassRenderer')

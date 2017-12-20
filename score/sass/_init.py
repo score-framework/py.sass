@@ -38,6 +38,10 @@ def init(confdict, tpl):
     Initializes this module acoording to :ref:`our module initialization
     guidelines <module_initialization>` with the following configuration keys:
 
+    :confkey:`cachedir` :confdefault:`None`
+        A folder that will be used for caching rendered css files. Not strictly
+        necessary, but will speed up the rendering proces a lot.
+
     """
     conf = dict(defaults.items())
     conf.update(confdict)
