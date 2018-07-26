@@ -7,7 +7,7 @@ with open(os.path.join(here, 'README.rst')) as f:
 
 setup(
     name='score.sass',
-    version='0.0.2',
+    version='0.0.3',
     description='Sass integration for The SCORE Framework',
     long_description=README,
     author='strg.at',
