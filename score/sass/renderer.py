@@ -27,7 +27,7 @@ class SassRenderer(Renderer):
         result = sass.compile(string=string,
                               include_paths=self._tpl_conf.rootdirs,
                               output_style='expanded',
-                              source_comments='line_numbers',
+                              source_comments=True,
                               custom_functions=functions)
         # Remove BOM from output:
         # https://github.com/dahlia/libsass-python/pull/52
@@ -51,7 +51,7 @@ class SassRenderer(Renderer):
         result = sass.compile(filename=file,
                               include_paths=self._tpl_conf.rootdirs,
                               output_style='expanded',
-                              source_comments='line_numbers',
+                              source_comments=True,
                               custom_functions=functions)
         # Remove BOM from output:
         # https://github.com/dahlia/libsass-python/pull/52
